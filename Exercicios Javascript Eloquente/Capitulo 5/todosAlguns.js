@@ -16,7 +16,7 @@ function some(array, predicate) {
   return false;
 }
 
-
+//TESTES
 console.log(every([NaN, NaN, NaN], isNaN));
 console.log(every([NaN, NaN, 4], isNaN));
 console.log(some([NaN, 3, 4], isNaN));
