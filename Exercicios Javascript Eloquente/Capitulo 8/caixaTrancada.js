@@ -23,7 +23,7 @@ function withBoxUnlocked(body) {
   if (!stat) {
     return body();
   }
-  
+
   box.unlock();
   try {
     return body();
