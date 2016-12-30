@@ -11,7 +11,7 @@ function verify(regexp, yes, no) {
   });
 }
 
-verify(/ca+(r|t)/,
+verify(/ca(r|t)/,
     ["my car", "bad cats"],
     ["camper", "high art"]);
 
@@ -20,15 +20,15 @@ verify(/pr?op/,
     ["plop"]);
 
 
-verify(/ferr+(et|y|ari)/,
+verify(/ferr(et|y|ari)/,
     ["ferret", "ferry", "ferrari"],
     ["ferrum", "transfer A"]);
 
-verify(/ious+\b/,
+verify(/ious\b/,
     ["how delicious", "spacious room"],
     ["ruinous", "consciousness"]);
 
-verify(/\s+(\.|:|;|,)/,
+verify(/\s(\.|:|;|,)/,
     ["bad punctuation ."],
     ["escape the dot"]);
 
