@@ -3,6 +3,16 @@ var fs = require("fs");
 var urlToPath = require("./corrigindo.js")
 var methods = Object.create(null);
 
+function respondErrorOrNothing(respond) {
+  return function(error) {
+    if (error)
+      respond(500, error.toString());
+    else
+      respond(204);
+  };
+}
+
+
 http.createServer(function(request, response) {
   function respond(code, body, type) {
     if (!type) type = "text/plain";
@@ -53,15 +63,6 @@ methods.DELETE = function(path, respond) {
   });
 };
 
-function respondErrorOrNothing(respond) {
-  return function(error) {
-    if (error)
-      respond(500, error.toString());
-    else
-      respond(204);
-  };
-}
-
 methods.PUT = function(path, respond, request) {
   var outStream = fs.createWriteStream(path);
   outStream.on("error", function(error) {
@@ -72,3 +73,21 @@ methods.PUT = function(path, respond, request) {
   });
   request.pipe(outStream);
 };
+
+/*Solução Exercicio Criando diretorios*/
+methods.MKCOL = function(path, respond) {
+  fs.stat(path, function(error, stats) {
+    if (error && error.code === "ENOENT") {
+      fs.mkdir(path, respondErrorOrNothing(respond));
+    }
+    else if (error) {
+      respond(500, error.toString());
+    }
+    else if (stat.isDirectory()) {
+      respond(204);
+    }
+    else {
+      respond(400, "Bad request");
+    }
+  });
+}
