@@ -1,3 +1,4 @@
-let hello = (name: string): string => 'Hello, ${name}';
+let hello = ( name: string ):
+    string => `hello, ${name}!`;
 
-document.getElementsByClassName('js-app')[0].innerHTML = hello('Medson');
+document.getElementsByClassName( 'js-app' )[0].innerHTML = hello( 'Name' );
